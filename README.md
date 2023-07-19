@@ -5,12 +5,12 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-Адрес репозитория: https://github.com/...
+Адрес репозитория: https://github.com/generalovpn/react-mesto-api-full-gha
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 84.201.132.21
 
-Frontend https://...
+Frontend https://mesto.generalovpn.nomoredomains.xyz
 
-Backend https://...
+Backend https://api.mesto.generalovpn.nomoredomains.xyz
