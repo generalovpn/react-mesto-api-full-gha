@@ -1,15 +1,18 @@
-function InfoTooltip(props) {
+import React from "react";
+import error from "../images/ErrorSign.svg";
+import ok from "../images/OkSign.svg";
+
+function InfoTooltip({ isOpen, onClose, isSuccess, infoText }) {
   return (
-    <div className={`popup ${props.isOpen ? "popup_opened" : ""}`} onClick={props.onCloseClick}>
-      <div className="popup__info">
-        <img src={props.image} alt={props.title} className="popup__status" />
-        <h2 className="popup__message">{props.title}</h2>
+    <div className={`popup ${isOpen ? "popup_opened" : ""}`}>
+      <div className="popup__container">
         <button
-          onClick={props.onClose}
-          className="popup__close"
-          title="Закрыть"
           type="button"
+          className="popup__close-button"
+          onClick={onClose}
         />
+        <img className="popup__auth-image" src={isSuccess ? ok : error} alt={infoText}/>
+        <p className="popup__auth-text">{infoText}</p>
       </div>
     </div>
   );

@@ -1,15 +1,19 @@
 .profile {
-  max-width: 880px;
-  margin: 39px auto 0;
+  align-self: center;
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  max-width: 880px;
 }
 
-@media screen and (max-width: 890px) {
+@media screen and (max-width: 700px) {
   .profile {
-    max-width: 282px;
-    margin: 42px auto 0;
     flex-direction: column;
-    text-align: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .profile {
+    width: calc(100% - 19px*2);
   }
 }

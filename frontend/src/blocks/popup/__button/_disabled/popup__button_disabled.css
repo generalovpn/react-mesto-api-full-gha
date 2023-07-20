@@ -1,0 +1,10 @@
+.popup__button_disabled {
+  color: rgb(194, 191, 191);
+  background-color: white;
+  border: 1px solid rgb(194, 191, 191);
+  border-radius: 2px;
+}
+
+.popup__button_disabled:hover {
+  cursor: default;
+}

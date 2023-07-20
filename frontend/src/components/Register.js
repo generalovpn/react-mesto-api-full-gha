@@ -1,49 +1,58 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useCallback } from "react";
+import {  Link } from "react-router-dom";
 
-function Register(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function Login({ onRegister }) {
+  const [userData, setUserData] = useState({ email: "", password: "" });
 
-  function handleEmailInput(e) {
-    setEmail(e.target.value);
-  }
+  const handleChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setUserData({
+        ...userData,
+        [name]: value,
+      });
+    },
+    [userData]
+  );
 
-  function handlePasswordInput(e) {
-    setPassword(e.target.value);
-  }
-
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
+    let { email, password } = userData;
     e.preventDefault();
-    props.onRegister(email, password);
-  }
+    onRegister({ email, password });
+  };
+
+
 
   return (
-    <section className="login">
-      <h2 className="login__title">Регистрация</h2>
-      <form className="login__form" onSubmit={handleSubmit}>
-        <input 
-          className="login__input" 
-          type="email" 
-          placeholder="Email" 
-          value={email} 
-          onChange={handleEmailInput} 
-          required
-        />
-        <input 
-          className="login__input" 
-          type="password" 
-          placeholder="Пароль" 
-          value={password} 
-          autoComplete="on" 
-          onChange={handlePasswordInput} 
-          required
-        />
-        <button className="login__btn" type="submit">Зарегистрироваться</button>
-      </form>
-      <p className="login__text">Уже зарегистрированы?<Link to="/sign-in" className="login__link">Войти</Link></p>
-    </section>
+    <form onSubmit={handleSubmit} className="auth__form">
+      <h2 className="auth__form-title">Регистрация</h2>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        placeholder="Email"
+        value={userData.email || ""}
+        className="auth__form-input"
+        onChange={handleChange}
+      />
+
+      <input
+        id="password"
+        name="password"
+        type="password"
+        placeholder="Пароль"
+        value={userData.password || ""}
+        className="auth__form-input"
+        onChange={handleChange}
+      />
+
+      <button type="submit" className="auth__button">
+        Зарегистрироваться
+      </button>
+        <Link to="/sign-in" className="auth__signin-link">
+          Уже зарегистрированы? Войти
+        </Link>
+    </form>
   );
 }
-
-export default Register;
+export default Login;

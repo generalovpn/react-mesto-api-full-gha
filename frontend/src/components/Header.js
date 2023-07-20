@@ -1,16 +1,42 @@
+import React from "react";
 import logo from "../images/logo.svg";
-import { Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
-function Header(props) {
+function Header({email, onLogOut}) {
   return (
     <header className="header">
-      <img src={logo} className="header__logo" alt="Логотип Mesto"/>
-      <nav className="header__auth">
-        <p className="header__text">{props.mail}</p>
-        <Link to={props.route} className="header__link" type="button" onClick={props.onClick}>{props.title}</Link>
-      </nav>
+      <img className="header__logo" src={logo} alt="Логотип Место" />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className="header__nav">
+              <p className="header__email">{email}</p>
+              <Link className="header__link header__link_active" onClick={onLogOut}>
+                Выйти
+              </Link>
+            </div>
+          }
+        />
+        <Route
+          path="/sign-up"
+          element={
+            <Link className="header__link" to={"/sign-in"}>
+              Войти
+            </Link>
+          }
+        />
+        <Route
+          path="/sign-in"
+          element={
+            <Link className="header__link" to={"/sign-up"}>
+              Регистрация
+            </Link>
+          }
+        />
+      </Routes>
     </header>
-  )
+  );
 }
 
 export default Header;

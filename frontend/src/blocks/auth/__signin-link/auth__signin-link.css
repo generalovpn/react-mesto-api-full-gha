@@ -1,0 +1,13 @@
+.auth__signin-link {
+    margin-top: 15px;
+    height: 17px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}

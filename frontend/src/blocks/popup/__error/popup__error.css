@@ -1,0 +1,19 @@
+.popup__error {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  align-self: flex-start;
+  margin-bottom: 1px;
+  width: 358px;
+  min-height: 30px;
+  word-wrap: break-word;
+}
+
+
+@media screen and (max-width: 550px) {
+  .popup__error {
+    width: 238px;
+  }
+}

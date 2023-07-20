@@ -1,0 +1,6 @@
+.profile__avatar-cover {
+  background-color: black;
+  background-image: url(../../../images/patchAvatar.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}

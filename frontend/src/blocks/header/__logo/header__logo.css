@@ -1,11 +1,22 @@
 .header__logo {
-  width: calc((100vw - 320px) / (1280 - 320) * (142 - 103.7) + 103.7px);
-  padding-left: calc((100vw - 320px) / (1280 - 320) * (0 - 20) + 20px);
+  width: 142px;
+  height: 33px;
+  margin-top: 45px;
+  margin-bottom: 36px;
 }
 
-@media screen and (min-width: 1280px) {
+
+@media screen and (max-width: 500px) {
   .header__logo {
-    width: 142px;
-    padding-left: 0;
+    margin-top: 28px;
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .header__logo {
+    width: 103.74px;
+    height: 24.4px;
+    margin-left: 27px;
   }
 }

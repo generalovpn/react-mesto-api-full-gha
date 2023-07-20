@@ -1,6 +1,0 @@
-.element__like-group {
-  display: flex;
-  justify-content: space-between;
-  flex-flow: column;
-  gap: 3px;
-}

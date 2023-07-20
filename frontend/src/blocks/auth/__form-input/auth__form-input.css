@@ -1,0 +1,14 @@
+.auth__form-input {
+    height: 27px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(204, 204, 204, 1);
+    background-color: black;
+    border: none;
+    border-bottom: 2px solid rgba(204, 204, 204, 1);
+    margin-bottom: 30px;
+
+}

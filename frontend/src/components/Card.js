@@ -1,59 +1,45 @@
-import React from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import React, { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function Card(props) {
-  const currentUser = React.useContext(CurrentUserContext);
-  const isOwn = props.card.owner._id === currentUser._id;
-  const isLiked = props.card.likes.some(i => i._id === currentUser._id);
-
-  const cardDeleteButtonClassName = (
-    `element__btn-delete ${isOwn ? "element__btn-delete_visible" : ""}`
-  );
-
-  const cardLikeButtonClassName = (
-    `element__heart ${isLiked ? "element__heart_active" : ""}`
-  );
-
-  function handleClick() {
-    props.onCardClick(props.card);
-  }
-
-  function handleLikeClick() {
-    props.onCardLike(props.card);
-  }
-
-  function handleDeleteClick() {
-    props.onCardDelete(props.card);
-  }
+function Card({ card, onCardClick, onCardDelete, onCardDislike, onCardLike }) {
+  const currentUser = useContext(CurrentUserContext);
+  // Определяем, являемся ли мы владельцем текущей карточки
+  const isOwn = card.owner === currentUser._id;
+  // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
+  const isLiked = card.likes.some((i) => i === currentUser._id);
 
   return (
-    <article className="element">
-      <img 
-        className="element__picture" 
-        src={props.link} 
-        alt={props.name} 
-        title="Посмотреть в полном размере" 
-        onClick={handleClick}/>
-      <button 
-        className={cardDeleteButtonClassName} 
-        type="button" 
-        title="Удалить" 
-        onClick={handleDeleteClick}
+    <article className="card">
+      {isOwn && (
+        <button
+          type="button"
+          className="card__button-delete"
+          onClick={() => onCardDelete(card._id)}
+        />
+      )}
+      <img
+        className="card__image"
+        src={card.link}
+        alt={card.name}
+        onClick={() => onCardClick(card)}
       />
-      <figcaption className="element__group">
-        <h2 className="element__title">{props.name}</h2>
-        <div className="element__like-group">
-          <button 
-            className={cardLikeButtonClassName} 
-            type="button" 
-            title="Нравится" 
-            onClick={handleLikeClick}
+      <div className="card__bottom">
+        <h2 className="card__title">{card.name}</h2>
+        <div className="card__likes">
+          <button
+            type="button"
+            className={`card__button-like ${
+              isLiked && "card__button-like_active"
+            }`}
+            onClick={() =>
+              isLiked ? onCardDislike(card._id) : onCardLike(card._id)
+            }
           />
-          <p className="element__likes-count">{props.likes}</p>
+          <p className="card__likes-number">{card.likes.length}</p>
         </div>
-      </figcaption>
+      </div>
     </article>
-  )
+  );
 }
 
 export default Card;

@@ -1,98 +1,92 @@
 class Api {
-  constructor({ headers, baseUrl }) {
-    this._headers = headers;
+  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
+    this._headers = headers;
+  }
+
+  _request(url, options) {
+    return fetch(url, options).then(this._checkResponse);
+  }
+
+  getUserInfo() {
+    return this._request(this._baseUrl + `users/me`, {
+      headers: this._headers,
+    });
+  }
+
+  getInitialCards() {
+    return this._request(this._baseUrl + `cards`, {
+      headers: this._headers,
+    });
+  }
+
+  postCard({ name, link }) {
+    return this._request(this._baseUrl + `cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      }),
+    });
+  }
+
+  deleteCard(_id) {
+    return this._request(this._baseUrl + `cards/` + _id, {
+      method: "DELETE",
+      headers: this._headers,
+    });
+  }
+
+  patchUserInfo({ name, about }) {
+    return this._request(this._baseUrl + `users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about,
+      }),
+    });
+  }
+
+  putLike(cardId) {
+    return this._request(this._baseUrl + `cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    });
+  }
+
+  deleteLike(cardId) {
+    return this._request(this._baseUrl + `cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    });
+  }
+
+  patchAvatar({ avatar }) {
+    return this._request(this._baseUrl + `users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    });
   }
 
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
-    } else {
-      return Promise.reject(`${res.status} ${res.statusText}`);
     }
-  }
-
-  getUserInfo() {
-    const requestUrl = this._baseUrl + '/users/me';
-    return fetch(requestUrl, {
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
-
-  getInitialCards() {
-    const requestUrl = this._baseUrl + '/cards';
-    return fetch(requestUrl, {
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
-
-  updateUserInfo(data) {
-    const requestUrl = this._baseUrl + '/users/me';
-    return fetch(requestUrl, {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: data.profile_name,
-        about: data.profile_job
-      })
-    }).then(this._checkResponse);
-  }
-
-  addNewCard(data) {
-    const requestUrl = this._baseUrl + '/cards';
-    return fetch(requestUrl, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: data.name,
-        link: data.link
-      })
-    }).then(this._checkResponse);
-  }
-
-  removeCard(data) {
-    const requestUrl = this._baseUrl + `/cards/${data._id}`;
-    return fetch(requestUrl, {
-      method: 'DELETE',
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
-
-  addCardLike(cardId) {
-    const requestUrl = this._baseUrl + `/cards/likes/${cardId}`;
-    return fetch(requestUrl, {
-      method: 'PUT',
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
-
-  deleteCardLike(cardId) {
-    const requestUrl = this._baseUrl + `/cards/likes/${cardId}`;
-    return fetch(requestUrl, {
-      method: 'DELETE',
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
-
-  updateProfileAvatar(data) {
-    const requestUrl = this._baseUrl + `/users/me/avatar`;
-    return fetch(requestUrl, {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: data.avatar_link
-      })
-    }).then(this._checkResponse);
+    return Promise.reject(`Ошибка ${res.status}`);
   }
 }
 
-
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-63",
+  baseUrl: "https://api.mesto.constantine.nomoredomains.rocks/",
   headers: {
-    authorization: "a9110206-e08b-4912-9750-2ef951bd76b4",
+    authorization: `Bearer ${localStorage.getItem("token")}`,
     "Content-Type": "application/json",
   },
 });
 
-export default api;
+export { api };
