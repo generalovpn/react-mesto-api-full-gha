@@ -10,18 +10,18 @@ const routes = require('./routes/index');
 const { handleErrors } = require('./middlewares/handleErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3001 } = process.env;
+const { PORT = 3001, MDB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 1000,
 });
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
+mongoose.connect(MDB);
 
 app.use(helmet());
 app.use(requestLogger);
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.options('/', cors());
 app.use(limiter);
 app.use(cookieParser());

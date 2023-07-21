@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 84.201.132.21
+IP 84.201.132.21
 
 Frontend https://mesto.generalovpn.nomoredomains.xyz
 

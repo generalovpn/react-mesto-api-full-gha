@@ -82,7 +82,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://api.mesto.constantine.nomoredomains.rocks/",
+  baseUrl: "https://api.mesto.generalovpn.nomoredomains.xyz/",
   headers: {
     authorization: `Bearer ${localStorage.getItem("token")}`,
     "Content-Type": "application/json",

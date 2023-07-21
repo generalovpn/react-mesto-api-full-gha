@@ -47,7 +47,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: "https://api.mesto.constantine.nomoredomains.rocks/",
+  baseUrl: "https://api.mesto.generalovpn.nomoredomains.xyz/",
   headers: {
     "Content-Type": "application/json"
   },

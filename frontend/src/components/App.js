@@ -41,16 +41,10 @@ function App() {
       .login({ email, password })
       .then((data) => {
         localStorage.setItem("token", data.token);
-        // Object.defineProperty(api, '_headers', {
-        //   value: {
-        //     authorization: `Bearer ${localStorage.getItem("token")}`,
-        //     "Content-Type": "application/json",
-        //   },
-        // });
         api._headers = {
-              authorization: `Bearer ${localStorage.getItem("token")}`,
-              "Content-Type": "application/json",
-            }
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        }
         setLoggedIn(true);
         setEmail(email);
         navigate("/", { replace: true });
