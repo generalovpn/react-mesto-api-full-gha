@@ -12,7 +12,7 @@ router.post('/signup', validationSignup, createUser);
 router.use('/users', auth, userRoutes);
 router.use('/cards', auth, cardRoutes);
 
-router.use('/', auth, (req, res, next) => {
+router.use('/*', auth, (req, res, next) => {
   next(new NotFoundError('Маршрут не найден'));
 });
 
