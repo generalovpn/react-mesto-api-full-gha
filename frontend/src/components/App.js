@@ -9,7 +9,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import { api } from "../utils/Api";
-import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { auth } from "../utils/auth";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
@@ -101,6 +101,7 @@ function App() {
           setCurrentUser(userInfo);
           const cardDataReversed = cardData.reverse();
           setCards(cardDataReversed);
+          // setCards(cardData.reverse());
         })
         .catch(console.log);
     }
